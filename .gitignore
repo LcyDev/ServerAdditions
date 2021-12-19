@@ -3,9 +3,6 @@ ignore/
 originals/
 exclude/
 
-
-pom_old.xml
-old_pom.xml
 *.gitignore
 .gitignore
 .classpath
