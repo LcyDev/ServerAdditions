@@ -1,3 +1,17 @@
+#Custom
+ignore/
+originals/
+exclude/
+
+
+pom_old.xml
+old_pom.xml
+*.gitignore
+.gitignore
+.classpath
+.project
+
+
 # User-specific stuff
 .idea/
 
@@ -7,6 +21,7 @@
 
 # IntelliJ
 out/
+target/
 
 # Compiled class file
 *.class
@@ -95,7 +110,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-target/
 
 pom.xml.tag
 pom.xml.releaseBackup
