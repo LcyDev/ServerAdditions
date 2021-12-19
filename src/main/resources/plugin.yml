@@ -1,0 +1,7 @@
+name: ServerAdditions
+version: '${project.version}'
+main: dev.conah.serveradditions.ServerAdditions
+api-version: 1.18
+authors: [ ConaII_ ]
+website: https://github.com/ConaII
+description: 'Adds useful things to customize and decorate your server!'
