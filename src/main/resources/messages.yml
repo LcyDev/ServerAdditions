@@ -1,0 +1,4 @@
+general-messages:
+  no-permissions: "&cYou don't have the following permission to use this:"
+  reload-config: "&aThe config has been reloaded!"
+  reload-plugin: "&aThe plugin has been reloaded!"

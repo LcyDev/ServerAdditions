@@ -1,0 +1,54 @@
+# ↓ DO NOT TOUCH. ↓
+configVersion: 1.0 # ← DO NOT TOUCH (Not implemented yet)
+
+# Enable extra debugging info in the console.
+debugMode: false
+
+general-config:
+  # Prefix to use for the plugin.
+  prefix: "&8[&6ServerAdditions&8]"
+
+  # If modified, will automatically attempt to translate languages phrases. (Not implemented yet)
+  # List of language codes: (Not implemented yet)
+  language: en
+  # If enabled, will check for updates when your server starts up.
+  # If an update is available, you'll be notified via your server console. (Not implemented yet)
+  check-updates: true
+
+
+saving-config:
+  # Automatically save the server in minutes.
+  # "-1" or "0" to disable.
+  autoSaveTimer: 5
+
+  # Alias to /serveradditions save
+  save-alias:
+    - save
+
+  # Uncomment to enable replacing each command with the correct function.
+  replace-commands:
+    #- save-all
+    #- save-on
+    #- save-off
+
+  # Commands to execute when saving the server.
+  saving-commands:
+    - 'say Saved :p'
+
+shutdown-config:
+  # Enable to leave a verbose when shutdown.
+  # Current verbose: shutdown-code.txt
+  # Will be 1 if prompted by plugin, will be reset to 0 after restart.
+  # Example usage: This could mean a crash happened or that the server wasn't shutdown properly.
+  verbose: false
+
+  stop-alias:
+    # Add "stop" here to replace the server's one.
+    - shutdown
+  restart-alias:
+  # Add "restart" here to replace the server's one.
+
+  # Commands to execute just before shutting down the server.
+  shutdown-commands:
+    - 'say Goodbye.'
+    - kickall
