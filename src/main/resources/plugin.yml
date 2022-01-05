@@ -5,3 +5,18 @@ api-version: '1.16'
 authors: [ ConaII_ ]
 website: https://github.com/ConaII
 description: 'Adds useful things to customize and decorate your server!'
+
+commands:
+  se_save:
+    description: test
+    usage: /<command>
+
+permissions:
+  serveradditions.save:
+    default: op
+  serveradditions.save-flush:
+    default: op
+  serveradditions.save-on:
+    default: op
+  serveradditions.save.off:
+    default: op
