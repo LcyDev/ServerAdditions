@@ -6,11 +6,11 @@ debugMode: false
 
 general-config:
   # Prefix to use for the plugin.
-  prefix: "&8[&6ServerAdditions&8]"
+  prefix: '&8[&6ServerAdditions&8]'
 
   # If modified, will automatically attempt to translate languages phrases. (Not implemented yet)
   # List of language codes: (Not implemented yet)
-  language: en
+  language: en_US
   # If enabled, will check for updates when your server starts up.
   # If an update is available, you'll be notified via your server console. (Not implemented yet)
   check-updates: true
