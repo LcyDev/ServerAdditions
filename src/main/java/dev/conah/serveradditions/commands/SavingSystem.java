@@ -14,13 +14,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-import static dev.conah.serveradditions.utils.Variables.*;
 import static dev.conah.serveradditions.utils.PluginUtils.*;
+import static dev.conah.serveradditions.utils.Variables.*;
 
 
 public class SavingSystem implements CommandExecutor {
 
-    private static final ServerAdditions plugin = ServerAdditions.inst();
+    //private static final ServerAdditions plugin = ServerAdditions.inst();
 
 
     @Override
@@ -29,21 +29,75 @@ public class SavingSystem implements CommandExecutor {
         if(sender instanceof Player p){}
         if(sender instanceof ConsoleCommandSender c){}
 
-        //Scoreboard board = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
-        Objective obj = initializeOBJ("output", "dummy", "output");
+        Scoreboard sb = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
+        Objective obj = initializeOBJ("output", "dummy", "output 3");;
         int num;
 
-
         if(checkPerm(sender, "serveradditions.save")){
-            if(args.length == 0 || args[0].equalsIgnoreCase("all")){
-                Score save_all = obj.getScore("save-all");
-                num = save_all.getScore();
-                sendConsole("scoreboard players set output saveall 3");
-                sendConsole("save-all");
+            if(args.length == 0 || args[0].equalsIgnoreCase("all") || args[0].equalsIgnoreCase("-s")){
+                Score score = obj.getScore("save-all");
+                num = score.getScore();
+                sendConsole("scoreboard players set save-all output 3");
+                sendConsole("execute store success score save-all output run save-all");
+
+                if (args.length > 1 && args[1].equalsIgnoreCase("-s") || args.length > 0 && args[0].equalsIgnoreCase("-s")){
+                    broadcast("");
+                    broadcast("&8[&6Historika&8] &7Guardando todos los datos del servidor...", "silent");
+                    broadcast("");
+                    if(num==1){
+                        broadcast("");
+                        broadcast("&8[&6Historika&8] &7Los datos se guardaron correctamente!", "silent");
+                        broadcast("");
+                    }
+                    if(num==0){
+                        broadcast("");
+                        broadcast("&8[&6Historika&8] &7Se detecto un &cerror&7 al intentar guardar los datos!", "silent");
+                        broadcast("");
+                    }
+                    return true;
+                }
                 broadcast("");
                 broadcast("&8[&6Historika&8] &9Guardando todos los datos del servidor...");
                 broadcast("");
-                sendConsole("execute store success score output saveall run save-all");
+                if (num == 1) {
+                    broadcast("");
+                    broadcast("&8[&6Historika&8] &aLos datos se guardaron correctamente!");
+                    broadcast("");
+                }
+                if (num == 0) {
+                    broadcast("");
+                    broadcast("&8[&6Historika&8] &cSe detecto un error al intentar guardar los datos!");
+                    broadcast("");
+                }
+                return true;
+            }
+            if(args[0].equalsIgnoreCase("flush")&&checkPerm(sender, "serveradditions.save-flush")){
+                Score score = obj.getScore("save-flush");
+                num = score.getScore();
+                sendConsole("scoreboard players set save-flush output 3");
+                sendConsole("execute store success score save-flush output run save-all flush");
+
+                if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
+                    broadcast("");
+                    broadcast("&8[&6Historika&8] &7Guardando todos los datos del servidor...");
+                    broadcast("&8[&6Historika&8] &cFlushing enabled&7, esto puede congelar el servidor por unos segundos...");
+                    broadcast("");
+                    if(num==1){
+                        broadcast("");
+                        broadcast("&8[&6Historika&8] &7Los datos se guardaron correctamente!");
+                        broadcast("");
+                    }
+                    if(num==0){
+                        broadcast("");
+                        broadcast("&8[&6Historika&8] &7Se detecto un &cerror&7 al intentar guardar los datos!");
+                        broadcast("");
+                    }
+                    return true;
+                }
+                broadcast("");
+                broadcast("&8[&6Historika&8] &9Guardando todos los datos del servidor...");
+                broadcast("&8[&6Historika&8] &cFlushing enabled&7, esto puede congelar el servidor por unos segundos...");
+                broadcast("");
                 if(num==1){
                     broadcast("");
                     broadcast("&8[&6Historika&8] &aLos datos se guardaron correctamente!");
@@ -54,27 +108,83 @@ public class SavingSystem implements CommandExecutor {
                     broadcast("&8[&6Historika&8] &cSe detecto un error al intentar guardar los datos!");
                     broadcast("");
                 }
-            }
-            /*
-            if(args[0].equalsIgnoreCase("flush")&&checkPerm(sender, "serveradditions.save-flush")){
-                sendConsole("/save-all flush");
+                return true;
             }
             if(args[0].equalsIgnoreCase("on")&&checkPerm(sender, "serveradditions.save-on")){
-                sendConsole("/save-on");
+                Score score = obj.getScore("save-on");
+                num = score.getScore();
+                console.sendMessage(String.valueOf(num));
+                sendConsole("scoreboard players set save-on output 3");; 
+                console.sendMessage(String.valueOf(num));
+                sendConsole("execute store success score save-on output run save-on");
+                console.sendMessage(String.valueOf(num));
+                if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
+                    if(num==1){
+                        broadcast("");
+                        broadcast("&8[&6Historika&8] &7Guardado automatico &aactivado.");
+                        broadcast("");
+                    }
+                    if(num==0){
+                        broadcast("");
+                        broadcast("&8[&6Historika&8] &7Guardado automatico ya estaba &cactivado.");
+                        broadcast("");
+                    }
+                    return true;
+                }
+                if(num==1){
+                    broadcast("");
+                    broadcast("&8[&6Historika&8] &aGuardado automatico activado.");
+                    broadcast("");
+                    console.sendMessage(String.valueOf(num));
+                }
+                if(num==0){
+                    broadcast("");
+                    broadcast("&8[&6Historika&8] &cGuardado automatico ya estaba activado.");
+                    broadcast("");
+                    console.sendMessage(String.valueOf(num));
+                }
+                return true;
             }
-            if(args[0].equalsIgnoreCase("off")&&checkPerm(sender, "serveradditions.save-off")){
-                if(args[1].equalsIgnoreCase("-s")){
-                    sendConsole("/save-off");
-                    broadcast("", "silent");
-                }else
-                    sender.sendMessage("");
+            if(args[0].equalsIgnoreCase("off")&&checkPerm(sender, "serveradditions.save-off")) {
+                Score score = obj.getScore("save-off");
+                num = score.getScore();
+                console.sendMessage(String.valueOf(num));
+                sendConsole("scoreboard players set save-off output 3");
+                console.sendMessage(String.valueOf(num));
+                sendConsole("execute store success score save-off output run save-off");
+
+                if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
+                    if(num==1){
+                        broadcast("");
+                        broadcast("&8[&6Historika&8] &7Guardado automatico &edesactivado.");
+                        broadcast("");
+                    }
+                    if(num==0){
+                        broadcast("");
+                        broadcast("&8[&6Historika&8] &7Guardado automatico ya estaba &cdesactivado.");
+                        broadcast("");
+                    }
+                    return true;
+                }
+                if(num==1){
+                    broadcast("");
+                    broadcast("&8[&6Historika&8] &eGuardado automatico desactivado.");
+                    broadcast("");
+                    console.sendMessage(String.valueOf(num));
+                }
+                if(num==0){
+                    broadcast("");
+                    broadcast("&8[&6Historika&8] &cGuardado automatico ya estaba desactivado.");
+                    broadcast("");
+                    console.sendMessage(String.valueOf(num));
+                }
+                return true;
             }
             if(args[0].equalsIgnoreCase("help")){
                 sender.sendMessage("");
                 sender.sendMessage(_PREFIX_+" §cValid commands:");
                 sender.sendMessage("§e");
             }
-            */
             return true;
         }
         return  false;
