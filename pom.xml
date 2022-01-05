@@ -27,7 +27,7 @@
 
     <groupId>dev.conah</groupId>
     <artifactId>ServerAdditions</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.0-b14</version>
     <packaging>jar</packaging>
 
     <name>ServerAdditions</name>
