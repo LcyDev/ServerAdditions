@@ -1,9 +1,14 @@
 package dev.conah.serveradditions.utils;
 
 import dev.conah.serveradditions.ServerAdditions;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+
+import java.util.Objects;
 
 import static dev.conah.serveradditions.utils.Variables.*;
 
@@ -11,6 +16,14 @@ public class PluginUtils {
 
     static final ServerAdditions plugin = ServerAdditions.inst();
 
+
+    public static Objective initializeOBJ(String name, String criteria, String display) {
+        Scoreboard board = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
+        if (board.getObjective(name) == null) {
+            board.registerNewObjective(name, criteria, display);
+        }
+        return board.getObjective(name);
+    }
 
     public static boolean checkPerm(CommandSender sender, String perm) {
         return checkPerm(sender, perm, true);
@@ -21,21 +34,19 @@ public class PluginUtils {
         } else if (sendMessage) {
             sender.sendMessage("");
             sender.sendMessage(_PREFIX_);
-            sender.sendMessage("&cYou don't have the following permission to use this:"); //reminder to later replace this with .yml
+            sender.sendMessage("§cYou don't have the following permission to use this:");
             sender.sendMessage(" §6"+perm);
         }
         return false;
     }
 
     public static boolean sendCommand(CommandSender sender, String cmd) {
-        if(sender instanceof Player){
-            Player p = (Player)sender;
+        if(sender instanceof Player p){
             p.chat(cmd); //PlayerCommandPreProcessEvent included.
             //p.performCommand(cmd);
             return true;
         }
-        if(sender instanceof ConsoleCommandSender){
-            ConsoleCommandSender c = server.getConsoleSender();
+        if(sender instanceof ConsoleCommandSender c){
             plugin.getServer().dispatchCommand(c, cmd);
             return true;
         }
@@ -50,6 +61,7 @@ public class PluginUtils {
         broadcast(message, "global");
     }
     public static void broadcast(String message, String type){
+        message = ColorUtils.convert(message);
         if(type.equalsIgnoreCase("global")){
             server.broadcast(message, "serveradditions.receive.global");
         }
