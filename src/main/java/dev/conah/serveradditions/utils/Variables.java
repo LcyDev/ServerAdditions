@@ -3,6 +3,7 @@ package dev.conah.serveradditions.utils;
 import dev.conah.serveradditions.ServerAdditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.command.ConsoleCommandSender;
 
 public class Variables {
     private static final ServerAdditions plugin = ServerAdditions.inst();
@@ -12,4 +13,5 @@ public class Variables {
 
 
     public static Server server = Bukkit.getServer();
+    public static ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 }
