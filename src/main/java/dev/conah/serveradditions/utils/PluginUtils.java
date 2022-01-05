@@ -18,11 +18,11 @@ public class PluginUtils {
 
 
     public static Objective initializeOBJ(String name, String criteria, String display) {
-        Scoreboard board = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
-        if (board.getObjective(name) == null) {
-            board.registerNewObjective(name, criteria, display);
+        Scoreboard sb = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
+        if (sb.getObjective(name) == null) {
+            sb.registerNewObjective(name, criteria, display);
         }
-        return board.getObjective(name);
+        return sb.getObjective(name);
     }
 
     public static boolean checkPerm(CommandSender sender, String perm) {
@@ -71,5 +71,6 @@ public class PluginUtils {
         if(type.equalsIgnoreCase("silent")){
             server.broadcast(message,"serveradditions.receive.silent");
         }
+        console.sendMessage(message);
     }
 }
