@@ -1,10 +1,10 @@
 package dev.conah.serveradditions;
 
+import org.bukkit.plugin.java.JavaPlugin;
+import java.util.Objects;
+
 import dev.conah.serveradditions.commands.RestartSystem;
 import dev.conah.serveradditions.commands.SavingSystem;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Objects;
 
 import static dev.conah.serveradditions.utils.Console.*;
 import static dev.conah.serveradditions.utils.Variables.*;
@@ -70,7 +70,7 @@ public final class ServerAdditions extends JavaPlugin {
 
     }
     private void registerTabCompleter(){
-
+        Objects.requireNonNull(getCommand("save")).setTabCompleter(new SavingSystem());
     }
 
     public void printASCIIArt() {
