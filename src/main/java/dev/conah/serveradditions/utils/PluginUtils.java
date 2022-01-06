@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.Objects;
@@ -71,6 +72,5 @@ public class PluginUtils {
         if(type.equalsIgnoreCase("silent")){
             server.broadcast(message,"serveradditions.receive.silent");
         }
-        console.sendMessage(message);
     }
 }

@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
@@ -23,22 +24,23 @@ public class SavingSystem implements CommandExecutor {
     //private static final ServerAdditions plugin = ServerAdditions.inst();
 
 
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
 
         if(sender instanceof Player p){}
         if(sender instanceof ConsoleCommandSender c){}
 
-        Scoreboard sb = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
-        Objective obj = initializeOBJ("output", "dummy", "output 3");;
+        final Scoreboard sb = Bukkit.getScoreboardManager().getNewScoreboard();
+        final Objective obj = initializeOBJ("output", "dummy", "output");;
         int num;
 
         if(checkPerm(sender, "serveradditions.save")){
             if(args.length == 0 || args[0].equalsIgnoreCase("all") || args[0].equalsIgnoreCase("-s")){
                 Score score = obj.getScore("save-all");
-                num = score.getScore();
-                sendConsole("scoreboard players set save-all output 3");
+                score.setScore(3);
                 sendConsole("execute store success score save-all output run save-all");
+                num = score.getScore();
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s") || args.length > 0 && args[0].equalsIgnoreCase("-s")){
                     broadcast("");
@@ -73,9 +75,9 @@ public class SavingSystem implements CommandExecutor {
             }
             if(args[0].equalsIgnoreCase("flush")&&checkPerm(sender, "serveradditions.save-flush")){
                 Score score = obj.getScore("save-flush");
-                num = score.getScore();
-                sendConsole("scoreboard players set save-flush output 3");
+                score.setScore(3);
                 sendConsole("execute store success score save-flush output run save-all flush");
+                num = score.getScore();
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
                     broadcast("");
@@ -112,12 +114,10 @@ public class SavingSystem implements CommandExecutor {
             }
             if(args[0].equalsIgnoreCase("on")&&checkPerm(sender, "serveradditions.save-on")){
                 Score score = obj.getScore("save-on");
-                num = score.getScore();
-                console.sendMessage(String.valueOf(num));
-                sendConsole("scoreboard players set save-on output 3");; 
-                console.sendMessage(String.valueOf(num));
+                score.setScore(3);
                 sendConsole("execute store success score save-on output run save-on");
-                console.sendMessage(String.valueOf(num));
+                num = score.getScore();
+
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
                     if(num==1){
                         broadcast("");
@@ -147,11 +147,9 @@ public class SavingSystem implements CommandExecutor {
             }
             if(args[0].equalsIgnoreCase("off")&&checkPerm(sender, "serveradditions.save-off")) {
                 Score score = obj.getScore("save-off");
-                num = score.getScore();
-                console.sendMessage(String.valueOf(num));
-                sendConsole("scoreboard players set save-off output 3");
-                console.sendMessage(String.valueOf(num));
+                score.setScore(3);
                 sendConsole("execute store success score save-off output run save-off");
+                num = score.getScore();
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
                     if(num==1){
@@ -170,13 +168,11 @@ public class SavingSystem implements CommandExecutor {
                     broadcast("");
                     broadcast("&8[&6Historika&8] &eGuardado automatico desactivado.");
                     broadcast("");
-                    console.sendMessage(String.valueOf(num));
                 }
                 if(num==0){
                     broadcast("");
                     broadcast("&8[&6Historika&8] &cGuardado automatico ya estaba desactivado.");
                     broadcast("");
-                    console.sendMessage(String.valueOf(num));
                 }
                 return true;
             }
