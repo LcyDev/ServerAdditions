@@ -2,7 +2,6 @@ package dev.conah.serveradditions.utils;
 
 import dev.conah.serveradditions.ServerAdditions;
 
-import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,56 +13,58 @@ public class Console {
     /. Only info, warn and severe work by default on a server
     /. Raw does not include [PluginPrefix]
      */
-    public static void log(Level level, String msg) {
-        //logger.log(level, () -> ColorChat.replaceColoredKeys(msg));
-        logger.log(level, () -> msg);
+    public static void log(Level level, String msg, String type) {
+        if(type.equalsIgnoreCase("raw")){
+            _logger.log(level, () -> ColorUtils.convert(msg));
+        } else {
+            logger.log(level, () -> ColorUtils.convert(msg));
+        }
     }
 
-    public static void rawlog(Level level, String msg) {
-        _logger.log(level, () -> msg);
+    public static void log(Level level, String msg) {
     }
 
     public static void info(String msg) {
-        log(Level.INFO, msg);
+        log(Level.INFO, msg, "plugin");
     }
-    public static void rawinfo(String msg) {
-        rawlog(Level.INFO, msg);
+    public static void raw_info(String msg) {
+        log(Level.INFO, msg, "raw");
     }
 
     public static void fine(String msg) {
-        log(Level.FINE, msg);
+        log(Level.FINE, msg, "plugin");
     }
-    public static void rawfine(String msg) {
-        rawlog(Level.FINE, msg);
+    public static void raw_fine(String msg) {
+        log(Level.FINE, msg, "raw");
     }
 
 
     public static void finer(String msg) {
-        log(Level.FINER, msg);
+        log(Level.FINER, msg, "plugin");
     }
-    public static void rawfiner(String msg) {
-        rawlog(Level.FINER, msg);
+    public static void raw_finer(String msg) {
+        log(Level.FINER, msg, "raw");
     }
 
     public static void finest(String msg) {
-        log(Level.FINEST, msg);
+        log(Level.FINEST, msg, "plugin");
     }
-    public static void rawfinest(String msg) {
-        rawlog(Level.FINEST, msg);
+    public static void raw_finest(String msg) {
+        log(Level.FINEST, msg, "raw");
     }
 
     public static void warn(String msg) {
-        log(Level.WARNING, msg);
+        log(Level.WARNING, msg, "plugin");
     }
-    public static void rawwarn(String msg) {
-        rawlog(Level.WARNING, msg);
+    public static void raw_warn(String msg) {
+        log(Level.WARNING, msg, "raw");
     }
 
     public static void severe(String msg) {
-        log(Level.SEVERE, msg);
+        log(Level.SEVERE, msg, "plugin");
     }
-    public static void rawsevere(String msg) {
-        rawlog(Level.SEVERE, msg);
+    public static void raw_severe(String msg) {
+        log(Level.SEVERE, msg, "raw");
     }
 
     public static void debug(String msg) {
@@ -71,9 +72,9 @@ public class Console {
             info(msg);
         }
     }
-    public static void rawdebug(String msg) {
+    public static void raw_debug(String msg) {
         if (plugin.hasDebuggingMode()) {
-            rawinfo(msg);
+            raw_info(msg);
         }
     }
 
