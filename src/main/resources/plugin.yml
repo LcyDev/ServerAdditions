@@ -7,9 +7,12 @@ website: https://github.com/ConaII
 description: 'Adds useful things to customize and decorate your server!'
 
 commands:
-  se_save:
-    description: test
-    usage: /<command>
+  save:
+    description: Fancy save for your server!
+    aliases: se_save
+
+  se_restart:
+    description: Fancy restart for your server!
 
 permissions:
   serveradditions.save:
