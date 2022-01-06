@@ -17,14 +17,13 @@ commands:
 permissions:
   serveradditions.save:
     default: op
-
+  serveradditions.save.silent:
+    default: op
   serveradditions.save-flush:
     default: op
-
   serveradditions.save-on:
     default: op
-
-  serveradditions.save.off:
+  serveradditions.save-off:
     default: op
 
   serveradditions.receive.global:
