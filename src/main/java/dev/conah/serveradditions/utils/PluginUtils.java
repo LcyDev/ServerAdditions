@@ -33,8 +33,8 @@ public class PluginUtils {
             return true;
         } else if (sendMessage) {
             sender.sendMessage("");
-            sender.sendMessage(_PREFIX_);
-            sender.sendMessage("§cYou don't have the following permission to use this:");
+            sender.sendMessage(_CPREFIX_);
+            sender.sendMessage("§4>> §cYou don't have the following permission to use this:");
             sender.sendMessage(" §6"+perm);
         }
         return false;
@@ -42,15 +42,28 @@ public class PluginUtils {
 
     public static boolean sendCommand(CommandSender sender, String cmd) {
         if(sender instanceof Player p){
-            p.chat(cmd); //PlayerCommandPreProcessEvent included.
-            //p.performCommand(cmd);
-            return true;
+            //PlayerCommandPreProcessEvent included. (Needs to add a / or will chat.)
+            if(cmd.startsWith("c:")) {
+                cmd = cmd.substring(0, 2);
+                p.chat(cmd);
+            }else{
+                p.performCommand(cmd);
+            }
         }
-        if(sender instanceof ConsoleCommandSender c){
+        if(sender instanceof ConsoleCommandSender c) {
+            if(cmd.startsWith("c:/")) {
+                cmd = cmd.substring(0, 3);
+            }
+            if(cmd.startsWith("c:")) {
+                broadcast(cmd);
+                return true;
+            }
+            if(cmd.startsWith("/")){
+                cmd = cmd.substring(0, 1);
+            }
             plugin.getServer().dispatchCommand(c, cmd);
-            return true;
         }
-        return false;
+        return true;
     }
     public static void sendConsole(String cmd){
         ConsoleCommandSender c = server.getConsoleSender();
