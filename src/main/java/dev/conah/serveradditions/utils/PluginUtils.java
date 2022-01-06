@@ -17,7 +17,6 @@ public class PluginUtils {
 
     static final ServerAdditions plugin = ServerAdditions.inst();
 
-
     public static Objective initializeOBJ(String name, String criteria, String display) {
         Scoreboard sb = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
         if (sb.getObjective(name) == null) {
