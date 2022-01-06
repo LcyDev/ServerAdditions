@@ -1,20 +1,18 @@
 package dev.conah.serveradditions.commands;
 
-import dev.conah.serveradditions.ServerAdditions;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Objective;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 
+//import dev.conah.serveradditions.ServerAdditions;
 import static dev.conah.serveradditions.utils.PluginUtils.*;
 import static dev.conah.serveradditions.utils.Variables.*;
 
@@ -24,12 +22,11 @@ public class SavingSystem implements CommandExecutor {
     //private static final ServerAdditions plugin = ServerAdditions.inst();
 
 
-
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
 
-        if(sender instanceof Player p){}
-        if(sender instanceof ConsoleCommandSender c){}
+        //if(sender instanceof Player p){}
+        //if(sender instanceof ConsoleCommandSender c){}
 
         final Scoreboard sb = Bukkit.getScoreboardManager().getNewScoreboard();
         final Objective obj = initializeOBJ("output", "dummy", "output");;
@@ -43,18 +40,18 @@ public class SavingSystem implements CommandExecutor {
                 num = score.getScore();
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s") || args.length > 0 && args[0].equalsIgnoreCase("-s")){
-                    broadcast("");
-                    broadcast("&8[&6Historika&8] &7Guardando todos los datos del servidor...", "silent");
-                    broadcast("");
+                    broadcast("","silent");
+                    broadcast("&8[&6Historika&8] &7Guardando todos los datos del servidor...","silent");
+                    broadcast("","silent");
                     if(num==1){
-                        broadcast("");
-                        broadcast("&8[&6Historika&8] &7Los datos se guardaron correctamente!", "silent");
-                        broadcast("");
+                        broadcast("","silent");
+                        broadcast("&8[&6Historika&8] &7Los datos se guardaron correctamente!","silent");
+                        broadcast("","silent");
                     }
                     if(num==0){
-                        broadcast("");
-                        broadcast("&8[&6Historika&8] &7Se detecto un &cerror&7 al intentar guardar los datos!", "silent");
-                        broadcast("");
+                        broadcast("","silent");
+                        broadcast("&8[&6Historika&8] &7Se detecto un &cerror&7 al intentar guardar los datos!","silent");
+                        broadcast("","silent");
                     }
                     return true;
                 }
@@ -80,19 +77,19 @@ public class SavingSystem implements CommandExecutor {
                 num = score.getScore();
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
-                    broadcast("");
-                    broadcast("&8[&6Historika&8] &7Guardando todos los datos del servidor...");
-                    broadcast("&8[&6Historika&8] &cFlushing enabled&7, esto puede congelar el servidor por unos segundos...");
-                    broadcast("");
+                    broadcast("","silent");
+                    broadcast("&8[&6Historika&8] &7Guardando todos los datos del servidor...","silent");
+                    broadcast("&8[&6Historika&8] &cFlushing enabled&7, esto puede congelar el servidor por unos segundos...","silent");
+                    broadcast("","silent");
                     if(num==1){
-                        broadcast("");
+                        broadcast("","silent");
                         broadcast("&8[&6Historika&8] &7Los datos se guardaron correctamente!");
-                        broadcast("");
+                        broadcast("","silent");
                     }
                     if(num==0){
-                        broadcast("");
-                        broadcast("&8[&6Historika&8] &7Se detecto un &cerror&7 al intentar guardar los datos!");
-                        broadcast("");
+                        broadcast("","silent");
+                        broadcast("&8[&6Historika&8] &7Se detecto un &cerror&7 al intentar guardar los datos!","silent");
+                        broadcast("","silent");
                     }
                     return true;
                 }
@@ -120,14 +117,14 @@ public class SavingSystem implements CommandExecutor {
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
                     if(num==1){
-                        broadcast("");
-                        broadcast("&8[&6Historika&8] &7Guardado automatico &aactivado.");
-                        broadcast("");
+                        broadcast("","silent");
+                        broadcast("&8[&6Historika&8] &7Guardado automatico &aactivado.","silent");
+                        broadcast("","silent");
                     }
                     if(num==0){
-                        broadcast("");
-                        broadcast("&8[&6Historika&8] &7Guardado automatico ya estaba &cactivado.");
-                        broadcast("");
+                        broadcast("","silent");
+                        broadcast("&8[&6Historika&8] &7Guardado automatico ya estaba &cactivado.","silent");
+                        broadcast("","silent");
                     }
                     return true;
                 }
@@ -151,14 +148,14 @@ public class SavingSystem implements CommandExecutor {
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
                     if(num==1){
-                        broadcast("");
-                        broadcast("&8[&6Historika&8] &7Guardado automatico &edesactivado.");
-                        broadcast("");
+                        broadcast("","silent");
+                        broadcast("&8[&6Historika&8] &7Guardado automatico &edesactivado.","silent");
+                        broadcast("","silent");
                     }
                     if(num==0){
-                        broadcast("");
-                        broadcast("&8[&6Historika&8] &7Guardado automatico ya estaba &cdesactivado.");
-                        broadcast("");
+                        broadcast("","silent");
+                        broadcast("&8[&6Historika&8] &7Guardado automatico ya estaba &cdesactivado.","silent");
+                        broadcast("","silent");
                     }
                     return true;
                 }
@@ -177,10 +174,11 @@ public class SavingSystem implements CommandExecutor {
             if(args[0].equalsIgnoreCase("help")){
                 sender.sendMessage("");
                 sender.sendMessage(_PREFIX_+" §cValid commands:");
-                sender.sendMessage("§e");
+                sender.sendMessage("§e  ");
+                return true;
             }
-            return true;
+            return false;
         }
-        return  false;
+        return  true;
     }
 }
