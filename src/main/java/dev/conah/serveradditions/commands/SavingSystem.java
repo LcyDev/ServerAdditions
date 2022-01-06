@@ -1,32 +1,35 @@
 package dev.conah.serveradditions.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Objective;
 import org.jetbrains.annotations.NotNull;
 
 
-//import dev.conah.serveradditions.ServerAdditions;
+import dev.conah.serveradditions.ServerAdditions;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static dev.conah.serveradditions.utils.PluginUtils.*;
 import static dev.conah.serveradditions.utils.Variables.*;
 
 
-public class SavingSystem implements CommandExecutor {
+public class SavingSystem implements CommandExecutor, TabCompleter {
 
-    //private static final ServerAdditions plugin = ServerAdditions.inst();
+    private static final ServerAdditions plugin = ServerAdditions.inst();
 
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
 
-        //if(sender instanceof Player p){}
-        //if(sender instanceof ConsoleCommandSender c){}
+        if(sender instanceof Player p){}
+        if(sender instanceof ConsoleCommandSender c){}
 
         final Scoreboard sb = Bukkit.getScoreboardManager().getNewScoreboard();
         final Objective obj = initializeOBJ("output", "dummy", "output");;
@@ -183,5 +186,45 @@ public class SavingSystem implements CommandExecutor {
             return false;
         }
         return  true;
+    }
+
+    @Nullable
+    @Override
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
+        if(sender.hasPermission("serveradditions.save")) {
+            if (args.length == 1) {
+                List<String> str = new ArrayList<>();
+                if (sender.hasPermission("serveradditions.save.silent")) {
+                    str.add("-s");
+                }
+                if (sender.hasPermission("serveradditions.save")) {
+                    str.add("all");
+                }
+                if (sender.hasPermission("serveradditions.save-flush")) {
+                    str.add("flush");
+                }
+                if (sender.hasPermission("serveradditions.save-on")) {
+                    str.add("on");
+                }
+                if (sender.hasPermission("serveradditions.save-off")) {
+                    str.add("off");
+                }
+                return str;
+            }
+            if (args.length == 2) {
+                List<String> str = new ArrayList<>();
+                if (sender.hasPermission("serveradditions.save.silent")) {
+                    str.add("-s");
+                }
+                return str;
+            }
+            if (args.length > 1) {
+                List<String> str = new ArrayList<>();
+                str.add("");
+                return str;
+            }
+            return null;
+        }
+        return null;
     }
 }
