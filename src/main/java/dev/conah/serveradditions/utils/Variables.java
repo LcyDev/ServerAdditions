@@ -11,6 +11,7 @@ public class Variables {
     public static String _PREFIX_ = plugin.getDescription().getPrefix();
     public static String _VERSION_ = plugin.getDescription().getVersion();
 
+    public static String _CPREFIX_ = plugin.getConfig().getString("");
 
     public static Server server = Bukkit.getServer();
     public static ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
