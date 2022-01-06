@@ -49,16 +49,21 @@ public final class ServerAdditions extends JavaPlugin {
             printASCIIArt();
             info("§6Internal load successful!");
             return true;
-        } catch(Exception e) {
-            e.printStackTrace();
-            severe(e.getMessage());
-            severe("§cERROR: Failed to load internally!");
-            return false;
         }
+        catch(java.lang.NullPointerException e) {
+            e.printStackTrace();
+            severe("§cERROR: Failed to load internally!");
+            warn("§eOne of the commands inside this plugin is not registered!");
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            severe("§cERROR: Failed to load internally!");
+        }
+        return false;
     }
 
-    private void registerCommands(){
-        Objects.requireNonNull(getCommand("se_save")).setExecutor(new SavingSystem());
+    private void registerCommands() {
+        Objects.requireNonNull(getCommand("save")).setExecutor(new SavingSystem());
         Objects.requireNonNull(getCommand("se_restart")).setExecutor(new RestartSystem());
     }
     private void registerListeners(){
