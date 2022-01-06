@@ -1,5 +1,6 @@
 package dev.conah.serveradditions;
 
+import dev.conah.serveradditions.commands.RestartSystem;
 import dev.conah.serveradditions.commands.SavingSystem;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -58,6 +59,7 @@ public final class ServerAdditions extends JavaPlugin {
 
     private void registerCommands(){
         Objects.requireNonNull(getCommand("se_save")).setExecutor(new SavingSystem());
+        Objects.requireNonNull(getCommand("se_restart")).setExecutor(new RestartSystem());
     }
     private void registerListeners(){
 
