@@ -48,8 +48,4 @@ public class ColorUtils {
         }
         return ChatColor.translateAlternateColorCodes('&', string);
     }
-
-    public static String replaceColoredKeys(String msg) {
-        return ColorUtils.convert(msg);
-    }
 }
