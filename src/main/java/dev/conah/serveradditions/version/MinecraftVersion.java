@@ -2,8 +2,8 @@ package dev.conah.serveradditions.version;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Comparator;
 import java.util.Objects;
+import java.util.Comparator;
 
 public class MinecraftVersion implements Comparable<MinecraftVersion> {
 
