@@ -173,8 +173,11 @@ public class SavingSystem implements CommandExecutor {
             }
             if(args[0].equalsIgnoreCase("help")){
                 sender.sendMessage("");
-                sender.sendMessage(_PREFIX_+" §cValid commands:");
-                sender.sendMessage("§e  ");
+                sender.sendMessage(_CPREFIX_+" §cValid commands:");
+                sender.sendMessage("§e /save");
+                sender.sendMessage("§e /save <all/flush>");
+                sender.sendMessage("§e /save <on/off>");
+                sender.sendMessage("§e /save help");
                 return true;
             }
             return false;
