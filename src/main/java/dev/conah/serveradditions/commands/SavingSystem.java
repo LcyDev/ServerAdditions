@@ -135,13 +135,11 @@ public class SavingSystem implements CommandExecutor {
                     broadcast("");
                     broadcast("&8[&6Historika&8] &aGuardado automatico activado.");
                     broadcast("");
-                    console.sendMessage(String.valueOf(num));
                 }
                 if(num==0){
                     broadcast("");
                     broadcast("&8[&6Historika&8] &cGuardado automatico ya estaba activado.");
                     broadcast("");
-                    console.sendMessage(String.valueOf(num));
                 }
                 return true;
             }
