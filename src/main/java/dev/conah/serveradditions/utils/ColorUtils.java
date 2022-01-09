@@ -3,6 +3,7 @@ package dev.conah.serveradditions.utils;
 import net.md_5.bungee.api.ChatColor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.jetbrains.annotations.Nullable;
 
 
@@ -16,36 +17,28 @@ public class ColorUtils {
     private static final Pattern HEX_PATTERN = Pattern.compile("&#[A-Fa-f0-9]{6}"); // &#RRGGBB
     private static final Pattern HEX_PATTERN_OTHER = Pattern.compile("&\\{#[A-Fa-f0-9]{6}}"); // &{#RRGGBB}
 
-    public static String convert(@Nullable String msg) {
-        if (msg == null) return null;
-        char[] b = coloredString(msg).toCharArray();
-        for (int i = 0; i < b.length - 1; i++) {
-            if (b[i] == '&') {
-                if (b[i + 1] == '&') {
-                    b[i + 1] = '=';
-                } else if (b[i + 1] != ' ') {
-                    b[i] = ChatColor.COLOR_CHAR;
-                    b[i + 1] = Character.toLowerCase(b[i + 1]);
+
+    public static String format(@Nullable String str) {
+        if(str==null) return null;
+        if (ServerVersion.isAfterOrEq(MinecraftVersions.v1_16)) {
+            Matcher match = HEX_PATTERN.matcher(str);
+            while (match.find()) {
+                String group = match.group(0);
+                //String color = str.substring(match.start(), match.end()); // alt way, can replace group. (except in if statement).
+                if(str.contains(group)) {
+                    str = str.replace(group, net.md_5.bungee.api.ChatColor.of(group.replace("&", "")).toString());
+                    match = HEX_PATTERN.matcher(str);
+                }
+            }
+            match = HEX_PATTERN_OTHER.matcher(str);
+            while (match.find()) {
+                String group = match.group(0);
+                if(str.contains(group)) {
+                    str = str.replace(group, net.md_5.bungee.api.ChatColor.of(group.replace("{", "").replace("}", "").replace("&", "")).toString());
+                    match = HEX_PATTERN_OTHER.matcher(str);
                 }
             }
         }
-        return new String(b).replace("&=", "&");
-    }
-
-    public static String coloredString(@Nullable String string) {
-        if (string == null) return null;
-        if (ServerVersion.isAfterOrEq(MinecraftVersions.v1_16)) {
-            Matcher match = HEX_PATTERN.matcher(string);
-            while (match.find()) {
-                String color = string.substring(match.start(), match.end());
-                string = string.replace(color, net.md_5.bungee.api.ChatColor.of(color) + "");
-            }
-            match = HEX_PATTERN_OTHER.matcher(string);
-            while (match.find()) {
-                String color = string.substring(match.start(), match.end());
-                string = string.replace(color, net.md_5.bungee.api.ChatColor.of(color) + "");
-            }
-        }
-        return ChatColor.translateAlternateColorCodes('&', string);
+        return ChatColor.translateAlternateColorCodes('&', str);
     }
 }

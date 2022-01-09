@@ -15,9 +15,9 @@ public class Console {
      */
     public static void log(Level level, String msg, String type) {
         if(type.equalsIgnoreCase("raw")){
-            _logger.log(level, () -> ColorUtils.convert(msg));
+            _logger.log(level, () -> ColorUtils.format(msg));
         } else {
-            logger.log(level, () -> ColorUtils.convert(msg));
+            logger.log(level, () -> ColorUtils.format(msg));
         }
     }
 
