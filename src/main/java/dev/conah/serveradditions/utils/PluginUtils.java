@@ -5,10 +5,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
+import java.util.List;
 import java.util.Objects;
 
 import static dev.conah.serveradditions.utils.Variables.*;
@@ -40,6 +40,8 @@ public class PluginUtils {
         return false;
     }
 
+
+
     public static boolean sendCommand(CommandSender sender, String cmd) {
         if(sender instanceof Player p){
             //PlayerCommandPreProcessEvent included. (Needs to add a / or will chat.)
@@ -70,19 +72,44 @@ public class PluginUtils {
         server.dispatchCommand(c, cmd);
     }
 
-    public static void broadcast(String message){
-        broadcast(message, "global");
+
+
+    public static void broadcastList(List<String> msgs) {
+        if(msgs!=null) {
+            for(String str : msgs) {
+                broadcast(str);
+            }
+        }
     }
-    public static void broadcast(String message, String type){
-        message = ColorUtils.convert(message);
-        if(type.equalsIgnoreCase("global")){
-            server.broadcast(message, "serveradditions.receive.global");
+    public static void broadcastList(List<String> msgs, String type) {
+        if(msgs!=null) {
+            for(String str : msgs) {
+                broadcast(str, type);
+            }
         }
-        if(type.equalsIgnoreCase("admin")){
-            server.broadcast(message,"serveradditions.receive.admin");
-        }
-        if(type.equalsIgnoreCase("silent")){
-            server.broadcast(message,"serveradditions.receive.silent");
+    }
+
+
+
+
+    public static void broadcast(String msg){
+        broadcast(msg, "global");
+    }
+    public static void broadcast(String msg, String type){
+        if(msg!=null) {
+            msg = ColorUtils.format(msg);
+            List<String> list = List.of(msg.split("\n"));
+            for(String str : list) {
+                if(type.equalsIgnoreCase("global")){
+                    server.broadcast(str, "serveradditions.receive.global");
+                }
+                if(type.equalsIgnoreCase("admin")){
+                    server.broadcast(str,"serveradditions.receive.admin");
+                }
+                if(type.equalsIgnoreCase("silent")){
+                    server.broadcast(str,"serveradditions.receive.silent");
+                }
+            }
         }
     }
 }
