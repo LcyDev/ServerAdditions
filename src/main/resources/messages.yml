@@ -2,3 +2,81 @@ general-messages:
   no-permissions: "&cYou don't have the following permission to use this:"
   reload-config: "&aThe config has been reloaded!"
   reload-plugin: "&aThe plugin has been reloaded!"
+
+
+public-saving:
+  normal:
+    - ""
+    - "&8[&6Historika&8] &#89AEE7Guardando todos los datos del servidor..."
+    - ""
+  flushing:
+    - ""
+    - "&8[&6Historika&8] &9Guardando todos los datos del servidor..."
+    - "&8[&6Historika&8] &cFlushing enabled&7, esto puede congelar el servidor por unos segundos..."
+    - ""
+  success:
+    - ""
+    - "&8[&6Historika&8] &aLos datos se guardaron correctamente!"
+    - ""
+  failure:
+    - ""
+    - "&8[&6Historika&8] &cSe detecto un error al intentar guardar los datos!"
+    - ""
+
+public-enabling:
+  enable:
+    - ""
+    - "&8[&6Historika&8] &aGuardado automatico activado."
+    - ""
+  disable:
+    - ""
+    - "&8[&6Historika&8] &eGuardado automatico desactivado."
+    - ""
+  already-on:
+    - ""
+    - "&8[&6Historika&8] &cGuardado automatico ya estaba activado."
+    - ""
+  already-off:
+    - ""
+    - "&8[&6Historika&8] &cGuardado automatico ya estaba desactivado."
+    - ""
+
+
+
+
+silent-saving:
+  normal:
+    - ""
+    - "&8[&6Historika&8] &7Guardando todos los datos del servidor..."
+    - ""
+  flushing:
+    - ""
+    - "&8[&6Historika&8] &7Guardando todos los datos del servidor..."
+    - "&8[&6Historika&8] &cFlushing enabled&7, esto puede congelar el servidor por unos segundos.."
+    - ""
+  success:
+    - ""
+    - "&8[&6Historika&8] &7Los datos se guardaron correctamente!"
+    - ""
+  failure:
+    - ""
+    - "&8[&6Historika&8] &7Se detecto un &cerror&7 al intentar guardar los datos!"
+    - ""
+
+silent-enabling:
+  enable:
+    - ""
+    - "&8[&6Historika&8] &7Guardado automatico &aactivado."
+    - ""
+  disable:
+    - ""
+    - "&8[&6Historika&8] &7Guardado automatico &edesactivado."
+    - ""
+  already-on:
+    - ""
+    - "&8[&6Historika&8] &7Guardado automatico ya estaba &cactivado."
+    - ""
+  already-off:
+    - ""
+    - "&8[&6Historika&8] &7Guardado automatico ya estaba &cdesactivado."
+    - ""
