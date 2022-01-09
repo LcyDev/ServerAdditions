@@ -1,5 +1,6 @@
 package dev.conah.serveradditions.commands;
 
+import dev.conah.serveradditions.utils.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -13,9 +14,9 @@ import dev.conah.serveradditions.ServerAdditions;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+import static dev.conah.serveradditions.utils.Config.*;
 import static dev.conah.serveradditions.utils.PluginUtils.*;
 import static dev.conah.serveradditions.utils.Variables.*;
 
@@ -43,33 +44,21 @@ public class SavingSystem implements CommandExecutor, TabCompleter {
                 num = score.getScore();
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s") || args.length > 0 && args[0].equalsIgnoreCase("-s")){
-                    broadcast("","silent");
-                    broadcast("&8[&6Historika&8] &7Guardando todos los datos del servidor...","silent");
-                    broadcast("","silent");
+                    broadcastList(msgYML.getStringList("silent-saving.normal"), "silent");
                     if(num==1){
-                        broadcast("","silent");
-                        broadcast("&8[&6Historika&8] &7Los datos se guardaron correctamente!","silent");
-                        broadcast("","silent");
+                        broadcastList(msgYML.getStringList("silent-saving.success"), "silent");
                     }
                     if(num==0){
-                        broadcast("","silent");
-                        broadcast("&8[&6Historika&8] &7Se detecto un &cerror&7 al intentar guardar los datos!","silent");
-                        broadcast("","silent");
+                        broadcastList(msgYML.getStringList("silent-saving.failure"), "silent");
                     }
                     return true;
                 }
-                broadcast("");
-                broadcast("&8[&6Historika&8] &9Guardando todos los datos del servidor...");
-                broadcast("");
+                broadcastList(msgYML.getStringList("public-saving.normal"));
                 if (num == 1) {
-                    broadcast("");
-                    broadcast("&8[&6Historika&8] &aLos datos se guardaron correctamente!");
-                    broadcast("");
+                    broadcastList(msgYML.getStringList("public-saving.success"));
                 }
                 if (num == 0) {
-                    broadcast("");
-                    broadcast("&8[&6Historika&8] &cSe detecto un error al intentar guardar los datos!");
-                    broadcast("");
+                    broadcastList(msgYML.getStringList("public-saving.failure"));
                 }
                 return true;
             }
@@ -80,35 +69,21 @@ public class SavingSystem implements CommandExecutor, TabCompleter {
                 num = score.getScore();
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
-                    broadcast("","silent");
-                    broadcast("&8[&6Historika&8] &7Guardando todos los datos del servidor...","silent");
-                    broadcast("&8[&6Historika&8] &cFlushing enabled&7, esto puede congelar el servidor por unos segundos...","silent");
-                    broadcast("","silent");
+                    broadcastList(msgYML.getStringList("silent-saving.flushing"), "silent");
                     if(num==1){
-                        broadcast("","silent");
-                        broadcast("&8[&6Historika&8] &7Los datos se guardaron correctamente!");
-                        broadcast("","silent");
+                        broadcastList(msgYML.getStringList("silent-saving.success"), "silent");
                     }
                     if(num==0){
-                        broadcast("","silent");
-                        broadcast("&8[&6Historika&8] &7Se detecto un &cerror&7 al intentar guardar los datos!","silent");
-                        broadcast("","silent");
+                        broadcastList(msgYML.getStringList("silent-saving.failure"), "silent");
                     }
                     return true;
                 }
-                broadcast("");
-                broadcast("&8[&6Historika&8] &9Guardando todos los datos del servidor...");
-                broadcast("&8[&6Historika&8] &cFlushing enabled&7, esto puede congelar el servidor por unos segundos...");
-                broadcast("");
+                broadcastList(msgYML.getStringList("public-saving.flushing"));
                 if(num==1){
-                    broadcast("");
-                    broadcast("&8[&6Historika&8] &aLos datos se guardaron correctamente!");
-                    broadcast("");
+                    broadcastList(msgYML.getStringList("public-saving.success"));
                 }
                 if(num==0){
-                    broadcast("");
-                    broadcast("&8[&6Historika&8] &cSe detecto un error al intentar guardar los datos!");
-                    broadcast("");
+                    broadcastList(msgYML.getStringList("public-saving.failure"));
                 }
                 return true;
             }
@@ -120,26 +95,18 @@ public class SavingSystem implements CommandExecutor, TabCompleter {
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
                     if(num==1){
-                        broadcast("","silent");
-                        broadcast("&8[&6Historika&8] &7Guardado automatico &aactivado.","silent");
-                        broadcast("","silent");
+                        broadcastList(msgYML.getStringList("silent-enabling.enable"), "silent");
                     }
                     if(num==0){
-                        broadcast("","silent");
-                        broadcast("&8[&6Historika&8] &7Guardado automatico ya estaba &cactivado.","silent");
-                        broadcast("","silent");
+                        broadcastList(msgYML.getStringList("silent-enabling.already-on"), "silent");
                     }
                     return true;
                 }
                 if(num==1){
-                    broadcast("");
-                    broadcast("&8[&6Historika&8] &aGuardado automatico activado.");
-                    broadcast("");
+                    broadcastList(msgYML.getStringList("public-enabling.enable"));
                 }
                 if(num==0){
-                    broadcast("");
-                    broadcast("&8[&6Historika&8] &cGuardado automatico ya estaba activado.");
-                    broadcast("");
+                    broadcastList(msgYML.getStringList("public-enabling.already-on"));
                 }
                 return true;
             }
@@ -151,26 +118,18 @@ public class SavingSystem implements CommandExecutor, TabCompleter {
 
                 if (args.length > 1 && args[1].equalsIgnoreCase("-s")){
                     if(num==1){
-                        broadcast("","silent");
-                        broadcast("&8[&6Historika&8] &7Guardado automatico &edesactivado.","silent");
-                        broadcast("","silent");
+                        broadcastList(msgYML.getStringList("silent-enabling.disable"), "silent");
                     }
                     if(num==0){
-                        broadcast("","silent");
-                        broadcast("&8[&6Historika&8] &7Guardado automatico ya estaba &cdesactivado.","silent");
-                        broadcast("","silent");
+                        broadcastList(msgYML.getStringList("silent-enabling.already-off"), "silent");
                     }
                     return true;
                 }
                 if(num==1){
-                    broadcast("");
-                    broadcast("&8[&6Historika&8] &eGuardado automatico desactivado.");
-                    broadcast("");
+                    broadcastList(msgYML.getStringList("public-enabling.disable"));
                 }
                 if(num==0){
-                    broadcast("");
-                    broadcast("&8[&6Historika&8] &cGuardado automatico ya estaba desactivado.");
-                    broadcast("");
+                    broadcastList(msgYML.getStringList("public-enabling.already-off"));
                 }
                 return true;
             }
