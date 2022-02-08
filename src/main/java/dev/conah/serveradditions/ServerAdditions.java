@@ -1,7 +1,17 @@
 package dev.conah.serveradditions;
 
+import dev.conah.serveradditions.utils.ChatUtils;
+import dev.conah.serveradditions.utils.ColorUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import dev.conah.serveradditions.commands.RestartSystem;
 import dev.conah.serveradditions.commands.SavingSystem;
@@ -9,10 +19,11 @@ import dev.conah.serveradditions.commands.SavingSystem;
 import static dev.conah.serveradditions.utils.Console.*;
 import static dev.conah.serveradditions.utils.Variables.*;
 
-public final class ServerAdditions extends JavaPlugin {
+public final class ServerAdditions extends JavaPlugin implements Listener {
 
     //Instance
     private static ServerAdditions instance;
+    public static HashMap<String, CommandModule> commands;
 
     public ServerAdditions() {
         super();
@@ -28,10 +39,11 @@ public final class ServerAdditions extends JavaPlugin {
     // Plugin enabling logic.
     // "[ServerAdditions] Enabling ServerAdditions"
     public void onEnable() {
+        commands = new HashMap<String, CommandModule>();
+        new ExampleCMD();
         if(!Initialize()) {
             instance.getPluginLoader().disablePlugin(instance);
         }
-
     }
 
     @Override
@@ -39,6 +51,7 @@ public final class ServerAdditions extends JavaPlugin {
     // "[ServerAdditions] Disabling ServerAdditions"
     public void onDisable() {
         instance = null;
+        commands.clear();
     }
 
     public boolean Initialize() {
@@ -47,6 +60,7 @@ public final class ServerAdditions extends JavaPlugin {
             registerListeners();
             registerTabCompleter();
             printASCIIArt();
+            saveDefaultConfig();
             info("§6Internal load successful!");
             return true;
         }
@@ -67,7 +81,7 @@ public final class ServerAdditions extends JavaPlugin {
         Objects.requireNonNull(getCommand("se_restart")).setExecutor(new RestartSystem());
     }
     private void registerListeners(){
-
+        getServer().getPluginManager().registerEvents(new ChatUtils(), this);
     }
     private void registerTabCompleter(){
         Objects.requireNonNull(getCommand("save")).setTabCompleter(new SavingSystem());

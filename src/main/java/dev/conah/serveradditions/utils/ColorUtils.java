@@ -11,8 +11,6 @@ import dev.conah.serveradditions.version.ServerVersion;
 import dev.conah.serveradditions.version.MinecraftVersions;
 
 public class ColorUtils {
-    private ColorUtils() {
-    }
 
     private static final Pattern HEX_PATTERN = Pattern.compile("&#[A-Fa-f0-9]{6}"); // &#RRGGBB
     private static final Pattern HEX_PATTERN_OTHER = Pattern.compile("&\\{#[A-Fa-f0-9]{6}}"); // &{#RRGGBB}
