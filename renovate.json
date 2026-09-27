@@ -25,7 +25,7 @@
       "automerge": false
     },
     {
-      "groupName": "Kotlin ecosystem"
+      "groupName": "Kotlin ecosystem",
       "description": "Kotlin ecosystem",
       "matchPackageNames": [
         "org.jetbrains.kotlin:kotlin-gradle-plugin",
